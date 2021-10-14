@@ -1,0 +1,56 @@
+#for sorted arrays
+
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        
+        
+        
+        #2 pointer approach 
+        left=0 #1st index
+        right=len(nums)-1 #end index
+        
+        while left<right:
+            nums.sort()
+            print(nums)
+            sum2=nums[left]+nums[right] #7
+            
+            if sum2>target: #7>6
+                right-=1    #right=[1]
+            elif sum2<target:
+                left+=1
+            else:             #sum2=target
+                return[left,right]
+                
+            # time complexuty:worst case ===26 and 9 here as they belongs to corner values so left pointer                 needs to be bring at right or left need to bring to right . 
+            #  nums = [2,7,11,15]  : 0(n) is the time complexity 
+            
+            #         as list is sorted we will use bst 
+#          nums = [2,7,11,15], target = 9 sum2=left+right ==17 now compare target to sum2 .as target >sum2 
+#                  ^       ^
+#                 left    right 
+            
+#         steps used:
+#             1.  2+!5=17
+#             2.  7+15==22
+#             3.  11+15 
+            
+#             we get answer in just 3 steps 
+            
+#             if you have used for loop : you would have many extra steps :brute force:used when you have less               values and you cannot use any other algorithm . time complexity===n square.
+#                         1.2+2
+#                         2.2+7
+#                         3.2+11
+#                         4.2+15
+#                         1.15+15
+#                         2.15+2
+#                         3.15+11
+#                         4.15+15
+                        
+#                         all over 16 cases ...that is 4 square or n square ==time complexity
+                               
+        
+        
+        
+        
+
+            
