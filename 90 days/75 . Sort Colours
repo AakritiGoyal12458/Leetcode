@@ -1,0 +1,28 @@
+https://leetcode.com/problems/sort-colors/
+
+class Solution {
+public:
+    
+    void sortColors(vector<int>& nums) {
+        
+        //dutch national flag algorithm 
+        int lp = 0 ; 
+        int hp=nums.size() - 1 ; 
+        int mid = 0 ;
+        
+        while (mid<=hp){
+            switch(nums[mid]){
+                    
+                case 0 :
+                    swap(nums[lp++] , nums[mid++]);
+                    break;
+                case 1 : 
+                    mid++ ; 
+                    break;
+                case 2 : 
+                    swap(nums[mid], nums[hp--]);
+                    break; 
+            }
+        }   
+    }
+};
