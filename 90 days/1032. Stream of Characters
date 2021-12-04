@@ -1,0 +1,58 @@
+We need to search that if there exists a word in the words[] which is a suffix of the current characters in a stream?
+Now, since we've to work on the suffix, we would insert strings in the Trie in a reversed manner Why? SInce, searching becomes easy.
+Insert All the strings in words[] in Trie in reversed manner also, find the maximum length of string present in words[] (this will reduce the searching complexity).
+For suppose, we need to find answer for a query so we will search in the trie , the current stream string in a reversed manner(since we have inserted string in reversed way).
+Also, while searching, take care that searching strings having length > max length is useless so break after that.
+Worst Case Number of Iterations ~ 10^7
+// Worst Case Iterations ~ 10^7
+
+class TrieNode{
+public:
+    bool isEnd; // checks whether any words ends at this node?
+    vector<TrieNode*> child; // child nodes of the current node
+    TrieNode(){ // assign default values
+        isEnd = false;
+        child.assign(26,nullptr);
+    }
+};
+
+class StreamChecker {
+public:
+    string stream = ""; // used to store stream of characters
+    TrieNode* root; // root of the Trie
+    int max_len = 0; // stores the maximum length of the word present
+    
+    // insert the string in the Trie in reverse manner
+    void insert(string s){
+        TrieNode* curr = root;
+        for(int i=s.length()-1;i>=0;i--){
+            if(!curr->child[s[i]-'a'])
+                curr->child[s[i]-'a'] = new TrieNode();
+            curr = curr->child[s[i]-'a'];
+        }
+        curr->isEnd = true; // marks true since a word ends here
+    }
+    
+    StreamChecker(vector<string>& words) {
+        root = new TrieNode(); // root of Trie initialized
+        for(auto s:words){
+            insert(s); // insert the string into trie
+            if(s.length()>max_len) // finds the maximum length
+                max_len = s.length();
+        }
+    }
+    
+    bool query(char letter) {
+        stream.push_back(letter); // store stream of characters
+        TrieNode* curr = root;int curr_len = max_len;
+        // find if there is an end of word for the suffix of the stream of characters using Trie
+        for(int i=stream.length()-1;i>=0 and curr_len;i--,curr_len--){
+            if(!curr->child[stream[i]-'a'])
+                return false;
+            curr = curr->child[stream[i]-'a'];
+            if(curr->isEnd)
+                return true;
+        }
+        return false;
+    }
+};
