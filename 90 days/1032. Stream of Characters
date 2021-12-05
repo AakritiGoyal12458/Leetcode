@@ -30,6 +30,7 @@ public:
                 curr->child[s[i]-'a'] = new TrieNode();
             curr = curr->child[s[i]-'a'];
         }
+        
         curr->isEnd = true; // marks true since a word ends here
     }
     
