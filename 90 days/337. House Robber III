@@ -1,0 +1,42 @@
+https://leetcode.com/problems/house-robber-iii/
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    typedef pair<int,int> robber;
+    
+    robber Robbing(TreeNode*root){
+        
+        if(!root)return {0,0};
+        
+        robber left=Robbing(root->left);
+        robber right=Robbing(root->right);
+        
+        robber ans;
+        
+        ans.first=left.second+right.second+root->val;
+        
+        ans.second=max(left.first,left.second) + max(right.first,right.second);
+        
+        return ans;
+    }
+    int rob(TreeNode* root) {
+        
+        robber cost=Robbing(root);
+        
+        int finalAns=max(cost.first,cost.second);
+        
+        return finalAns;
+        
+    }
+};
