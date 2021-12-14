@@ -10,7 +10,6 @@ public:
     {
         return (a / gcd(a, b)) * b;
     }
-    
     int nthMagicalNumber(int n, int a, int b) {
         int m = pow(10,9) + 7;
         if(a>b) swap(a,b);
